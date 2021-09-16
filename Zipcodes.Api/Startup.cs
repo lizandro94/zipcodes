@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Zipcodes.Application;
+using Zipcodes.Infrastructure;
 
 namespace Zipcodes.Api
 {
@@ -26,7 +28,8 @@ namespace Zipcodes.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddApplicationServices();
+            services.AddInfrastructureServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
