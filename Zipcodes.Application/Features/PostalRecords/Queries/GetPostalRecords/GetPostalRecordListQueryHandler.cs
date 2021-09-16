@@ -9,17 +9,24 @@ namespace Zipcodes.Application.Features.PostalRecords.Queries.GetPostalRecords
 {
     public class GetPostalRecordListQueryHandler : IRequestHandler<GetPostalRecordListQuery, List<PostalRecordListVM>>
     {
-        private readonly IPostalRecordRepository _postalRecordRepository;
+        private readonly IHtmlPackService _htmlPackService;
 
-        public GetPostalRecordListQueryHandler(IPostalRecordRepository postalRecordRepository)
+        public GetPostalRecordListQueryHandler(IHtmlPackService htmlPackService)
         {
-            _postalRecordRepository = postalRecordRepository;
+            _htmlPackService = htmlPackService;
         }
         public async Task<List<PostalRecordListVM>> Handle(GetPostalRecordListQuery request, CancellationToken cancellationToken)
         {
-            var postalRecords =  _postalRecordRepository.GetPostalRecords();
-            var data = postalRecords.Select(r => new PostalRecordListVM { Department = r.Department });
-            return data.ToList();
+            var postalRecords = await _htmlPackService.GetPostalRecords();
+            var mappedPostalRecords = postalRecords.Select(r => new PostalRecordListVM
+            {
+                Department = r.Department,
+                Municipality = r.Municipality,
+                Zipcode = r.Zipcode,
+                Neighbourhood = r.Neighbourhood
+            });
+
+            return mappedPostalRecords.ToList();
         }
     }
 }

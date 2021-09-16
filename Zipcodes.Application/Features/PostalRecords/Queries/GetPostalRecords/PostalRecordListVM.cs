@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Zipcodes.Application.Features.PostalRecords.Queries.GetPostalRecords
+﻿namespace Zipcodes.Application.Features.PostalRecords.Queries.GetPostalRecords
 {
     public class PostalRecordListVM
     {

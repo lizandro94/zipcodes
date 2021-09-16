@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Zipcodes.Application.Features.PostalRecords.Queries.GetPostalRecords;
 
@@ -20,10 +18,9 @@ namespace Zipcodes.Api.Controllers
             _mediator = mediator;
         }
 
-        //[Authorize]
         [HttpGet("", Name = "GetAllPostalRecords")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<PostalRecordListVM>>> GetDiaries()
+        public async Task<ActionResult<List<PostalRecordListVM>>> GetPostalRecords()
         {
             var dtos = await _mediator.Send(new GetPostalRecordListQuery());
             return Ok(dtos);
