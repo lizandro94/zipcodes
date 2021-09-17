@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Select, Card, Divider } from 'antd';
+import { Descriptions, Statistic, Select, Card, Divider } from 'antd';
 import { getPostalRecords } from '../../api/zipcodes/zipcodesClient';
 import { errorNotif } from '../../utils/notifUtilities';
 import './styles.scss';
 
 const Zipcodes = () => {
     const { Option } = Select;
+    const { Item } = Descriptions;
     const [postalRecords, setPostalRecords] = useState([]);
+    const [selectedRecord, setSelectedRecord] = useState({});
 
     const getPostalRecordsData = async () => {
         try {
@@ -23,7 +25,8 @@ const Zipcodes = () => {
     }, [])
 
     const onChangeZipcode = (value) => {
-        console.log(value);
+        const selected = postalRecords.find(r => r.key === value);
+        setSelectedRecord(selected);
     }
 
     const filterOptions = (input, option) =>
@@ -45,6 +48,12 @@ const Zipcodes = () => {
                     </Option>)}
             </Select>
             <Divider />
+            <Descriptions title={<h1>Zipcode detail</h1>}>
+                <Item label=""><Statistic title="Zipcode" valueStyle={{ color: '#3f8600' }} value={selectedRecord?.zipcode ?? '-'} /></Item>
+                <Item label=""><Statistic title="Department" value={selectedRecord.department ?? '-'} /></Item>
+                <Item label=""><Statistic title="Municipality" value={selectedRecord.municipality ?? '-'} /></Item>
+                <Item label=""><Statistic title="Neighborhood" value={selectedRecord?.neighbourhood ?? '-'} /></Item>
+            </Descriptions>
         </Card>
     );
 };
