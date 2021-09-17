@@ -7,7 +7,7 @@ using Zipcodes.Application.Features.PostalRecords.Queries.GetPostalRecords;
 
 namespace Zipcodes.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("postal/records")]
     [ApiController]
     public class PostalRecordsController : ControllerBase
     {

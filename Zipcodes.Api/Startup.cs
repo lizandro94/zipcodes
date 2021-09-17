@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using Zipcodes.Application;
 using Zipcodes.Infrastructure;
 
@@ -28,6 +29,8 @@ namespace Zipcodes.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Zipcodes.Api", Version = "v1" });
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +46,17 @@ namespace Zipcodes.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(policy =>
+            {
+                var allowedOrigins = Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+                if (allowedOrigins == null || allowedOrigins.Length == 0)
+                    throw new InvalidOperationException("Cors:AllowedOrigins is not defined on appsettings");
+
+                policy.WithOrigins(allowedOrigins);
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+            });
 
             app.UseAuthorization();
 
