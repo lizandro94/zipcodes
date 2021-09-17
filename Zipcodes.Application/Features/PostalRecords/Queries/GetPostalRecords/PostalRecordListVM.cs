@@ -6,5 +6,7 @@
         public string Municipality { get; set; }
         public string Zipcode { get; set; }
         public string Neighbourhood { get; set; }
+        public string Key => Zipcode + Neighbourhood;
+        public string DisplayText => $"{Zipcode} - {Neighbourhood}";
     }
 }

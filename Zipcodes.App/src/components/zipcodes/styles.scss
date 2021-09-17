@@ -1,0 +1,15 @@
+.zip-card {
+    width: 80%;
+    margin: auto;
+
+    @media only screen and (max-width: 768px) {
+        width: 100%;
+    }
+}
+
+.card-header {
+    display: flex;
+    span {
+        flex: 1;
+    }
+}
