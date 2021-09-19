@@ -23,12 +23,12 @@
 git clone https://github.com/lizandro94/zipcodes.git
 ```
 2. Navigate to repo folder (zipcodes) and open solution (Zipcodes.sln) with visual studio
-3. Make sure the start up project is `Zipcodes.Api` and Run the project (F5)
+3. Make sure the start up project is `src/API/Zipcodes.Api` and Run the project (F5)
 
 ### Running Frontend
-4. Open repo folder in the console
+4. Open react app folder in the console
 ```bash
-cd zipcodes/
+cd zipcodes/Zipcodes.App
 ```
 5. Install dependencies
 ```bash
