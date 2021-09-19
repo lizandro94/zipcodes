@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'antd';
+import { Select, Empty } from 'antd';
 
 const Filter = ({ postalRecords, onChangeZipcode }) => {
     const { Option } = Select;
@@ -14,6 +14,7 @@ const Filter = ({ postalRecords, onChangeZipcode }) => {
             placeholder="Select a zipcode"
             optionFilterProp="children"
             onChange={onChangeZipcode}
+            notFoundContent={<Empty description="Not zipcode found" />}
             filterOption={filterOptions}
         >
             {postalRecords.map(record =>
